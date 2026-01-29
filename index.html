@@ -496,6 +496,87 @@
             background: linear-gradient(135deg, var(--basf-blue), var(--basf-light-blue));
         }
 
+        /* Instruction Overlay - Phase 3 */
+        .instruction-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .instruction-overlay.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .instruction-card {
+            background: white;
+            padding: 28px 24px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 300px;
+            margin: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .instruction-icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+            line-height: 1;
+        }
+
+        .instruction-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--basf-dark);
+            margin-bottom: 8px;
+        }
+
+        .instruction-text {
+            font-size: 15px;
+            color: var(--gray);
+            line-height: 1.5;
+            margin-bottom: 4px;
+        }
+
+        .instruction-highlight {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--basf-blue), var(--basf-light-blue));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .instruction-hint {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 16px;
+            opacity: 0.8;
+        }
+
         /* Platform Info Badge */
         .platform-badge {
             position: fixed;
@@ -531,6 +612,17 @@
 <body>
     <div class="platform-badge" id="platformBadge"></div>
     <div class="toast" id="toast"></div>
+
+    <!-- Instruction Overlay for Android -->
+    <div class="instruction-overlay" id="instructionOverlay">
+        <div class="instruction-card">
+            <div class="instruction-icon">📱</div>
+            <div class="instruction-title">Bước tiếp theo</div>
+            <p class="instruction-text">Chọn ứng dụng <strong>"Danh bạ"</strong> hoặc <strong>"Contacts"</strong> từ menu sẽ hiện ra</p>
+            <span class="instruction-highlight">👆 Chọn Danh bạ</span>
+            <p class="instruction-hint">Đang mở menu chia sẻ...</p>
+        </div>
+    </div>
 
     <div class="card-container">
         <div class="card">
@@ -673,6 +765,20 @@
             }, 3000);
         }
 
+        // Instruction overlay functions (Phase 3)
+        function showInstruction() {
+            document.getElementById('instructionOverlay').classList.add('show');
+        }
+
+        function hideInstruction() {
+            document.getElementById('instructionOverlay').classList.remove('show');
+        }
+
+        // Helper: sleep function
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
         // Generate vCard string
         function generateVCard() {
             return `BEGIN:VCARD
@@ -782,52 +888,63 @@ END:VCARD`;
             return false;
         }
 
-        // Main save contact function - Smart routing based on platform
+        // Main save contact function - Optimized platform-specific routing
         async function saveContact() {
             const btn = document.getElementById('saveContactBtn');
             btn.classList.add('saving');
             btn.innerHTML = '⏳ Đang xử lý...';
 
             try {
-                // Try Web Share API first (best experience on mobile)
-                if (platform.isMobile) {
+                // ===== PHASE 1: iOS - Direct vCard (one-tap, auto-opens Contacts) =====
+                if (platform.isIOS) {
+                    showToast('📥 Đang mở Danh bạ...', 'info');
+                    saveContactVCard();
+                    btn.classList.remove('saving');
+                    btn.innerHTML = '✅ Đã mở Danh bạ!';
+                    setTimeout(() => {
+                        btn.innerHTML = '📥 Lưu danh bạ';
+                    }, 2000);
+                    return;
+                }
+
+                // ===== PHASE 2: Android - Web Share with instruction overlay =====
+                if (platform.isAndroid) {
+                    // Show instruction overlay first
+                    showInstruction();
+
+                    // Wait 800ms for user to read instruction
+                    await sleep(800);
+
+                    // Try Web Share API
                     const shared = await saveContactWebShare();
+
+                    // Hide instruction
+                    hideInstruction();
+
                     if (shared) {
                         btn.classList.remove('saving');
-                        btn.innerHTML = '✅ Đã lưu!';
+                        btn.innerHTML = '✅ Đã chia sẻ!';
                         setTimeout(() => {
                             btn.innerHTML = '📥 Lưu danh bạ';
                         }, 2000);
                         return;
                     }
-                }
 
-                // Android-specific Intent (opens Contacts app directly)
-                if (platform.isAndroid) {
-                    // Use data: URL with vCard for Android
-                    const vcard = generateVCard();
-                    const dataUrl = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcard);
-
-                    // Create temporary link and click it
-                    const link = document.createElement('a');
-                    link.href = dataUrl;
-                    link.download = 'Trieu-Phu-Huu-BASF.vcf';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-
-                    showToast('📥 Mở file để thêm vào Danh bạ', 'info');
+                    // Fallback if Web Share not supported/failed
+                    showToast('📥 Tải file danh bạ - mở để lưu', 'info');
+                    saveContactVCard();
                     btn.classList.remove('saving');
                     btn.innerHTML = '📥 Lưu danh bạ';
                     return;
                 }
 
-                // iOS and other platforms - vCard download
+                // ===== Desktop fallback - vCard download =====
+                showToast('📥 Tải file xong! Mở file để thêm vào Danh bạ', 'info');
                 saveContactVCard();
 
             } catch (error) {
                 console.error('Save contact error:', error);
-                // Ultimate fallback
+                hideInstruction();
                 saveContactVCard();
             }
 
