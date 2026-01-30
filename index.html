@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triệu Phú Hữu | BASF Professional & Specialty Solutions</title>
+    <title>Hữu BASF | Danh thiếp điện tử</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#004A96">
+
+    <!-- iOS PWA Support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Hữu BASF">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -21,612 +33,135 @@
             --gold-warm: #FFC107;
             --amber: #FFAB00;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background:
-                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
                 linear-gradient(135deg, #004A96 0%, #21A0D2 50%, #003d7a 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px;
         }
-
-        .card-container {
-            width: 100%;
-            max-width: 420px;
-            perspective: 1000px;
-        }
-
+        .card-container { width: 100%; max-width: 420px; perspective: 1000px; }
         .card {
-            background: var(--white);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow:
-                0 25px 50px -12px rgba(0, 74, 150, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
+            background: linear-gradient(180deg, rgba(0,74,150,0.02) 0%, rgba(33,160,210,0.04) 30%, rgba(0,74,150,0.03) 70%, rgba(33,160,210,0.02) 100%);
+            border-radius: 24px; overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,74,150,0.4), 0 0 0 1px rgba(255,255,255,0.1);
             animation: fadeInUp 0.6s ease-out;
         }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Header Section */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .card-header {
             background: linear-gradient(135deg, var(--basf-blue) 0%, var(--basf-light-blue) 100%);
-            padding: 28px 24px 48px;
-            position: relative;
-            overflow: hidden;
+            padding: 28px 24px 48px; position: relative; overflow: hidden;
         }
-
         .card-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 200%;
+            content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
             animation: pulse 4s ease-in-out infinite;
         }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        /* BASF Official Logo */
-        .basf-logo {
-            position: relative;
-            z-index: 1;
-            margin-bottom: 8px;
-        }
-
-        .basf-logo svg {
-            height: 42px;
-            width: auto;
-        }
-
-        /* Profile Section */
-        .profile-section {
-            padding: 0 24px;
-            margin-top: -24px;
-            position: relative;
-            z-index: 2;
-        }
-
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.8; } }
+        .basf-logo { position: relative; z-index: 1; margin-bottom: 8px; }
+        .basf-logo svg { height: 42px; width: auto; }
+        .profile-section { padding: 0 24px; margin-top: -24px; position: relative; z-index: 2; }
         .profile-card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 10px 40px rgba(0, 74, 150, 0.15);
-            text-align: center;
+            background: linear-gradient(135deg, rgba(0,74,150,0.04) 0%, rgba(33,160,210,0.06) 50%, rgba(0,74,150,0.03) 100%);
+            border-radius: 16px; padding: 24px; box-shadow: 0 10px 40px rgba(0,74,150,0.15);
+            text-align: center; border: 1px solid rgba(255,255,255,0.3);
         }
-
         .avatar {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            margin: 0 auto 16px;
-            box-shadow: 0 8px 24px rgba(0, 74, 150, 0.3);
-            border: 4px solid var(--white);
-            overflow: hidden;
+            width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 16px;
+            box-shadow: 0 8px 24px rgba(0,74,150,0.3); border: 4px solid var(--white); overflow: hidden;
             background: linear-gradient(135deg, var(--basf-blue), var(--basf-light-blue));
         }
-
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: 90% 15%;
-        }
-
-        .name {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--basf-dark);
-            margin-bottom: 8px;
-        }
-
-        .title {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--basf-blue);
-            margin-bottom: 4px;
-        }
-
-        .division {
-            font-size: 13px;
-            color: var(--gray);
-            margin-bottom: 16px;
-        }
-
-        /* Product Badges */
-        .product-badges {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
+        .avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 90% 15%; }
+        .name { font-size: 24px; font-weight: 700; color: var(--basf-dark); margin-bottom: 8px; }
+        .title { font-size: 14px; font-weight: 500; color: var(--basf-blue); margin-bottom: 4px; }
+        .division { font-size: 13px; color: var(--gray); margin-bottom: 16px; }
+        .product-badges { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
         .product-badge {
-            position: relative;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 15px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            overflow: hidden;
-            cursor: default;
-            transition: all 0.3s ease;
+            position: relative; padding: 12px 24px; border-radius: 30px; font-size: 15px; font-weight: 800;
+            letter-spacing: 1.5px; text-transform: uppercase; overflow: hidden; cursor: default; transition: all 0.3s ease;
         }
-
         .product-badge::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
             animation: shimmer 2s infinite;
         }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
+        @keyframes shimmer { 0% { left: -100%; } 100% { left: 100%; } }
         .product-badge.mythic {
-            background: linear-gradient(135deg, #FFD700 0%, #FFC107 50%, #FFB300 100%);
-            color: #1a1a2e;
-            box-shadow:
-                0 4px 20px rgba(255, 193, 7, 0.5),
-                0 0 40px rgba(255, 215, 0, 0.3),
-                inset 0 2px 0 rgba(255,255,255,0.5),
-                inset 0 -2px 0 rgba(0,0,0,0.1);
-            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-        }
-
-        .product-badge.mythic:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow:
-                0 8px 30px rgba(255, 193, 7, 0.6),
-                0 0 50px rgba(255, 215, 0, 0.5);
-        }
-
-        .product-badge.seclira {
-            background: linear-gradient(135deg, #FFCA28 0%, #FFB300 50%, #FFA000 100%);
-            color: #1a1a2e;
-            box-shadow:
-                0 4px 20px rgba(255, 179, 0, 0.5),
-                0 0 40px rgba(255, 202, 40, 0.3),
-                inset 0 2px 0 rgba(255,255,255,0.5),
-                inset 0 -2px 0 rgba(0,0,0,0.1);
-            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-        }
-
-        .product-badge.seclira:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow:
-                0 8px 30px rgba(255, 179, 0, 0.6),
-                0 0 50px rgba(255, 202, 40, 0.5);
-        }
-
-        @keyframes glow-gold {
-            0%, 100% {
-                box-shadow: 0 4px 20px rgba(255, 193, 7, 0.5), 0 0 30px rgba(255, 215, 0, 0.3);
-            }
-            50% {
-                box-shadow: 0 4px 25px rgba(255, 193, 7, 0.7), 0 0 45px rgba(255, 215, 0, 0.5);
-            }
-        }
-
-        @keyframes glow-amber {
-            0%, 100% {
-                box-shadow: 0 4px 20px rgba(255, 179, 0, 0.5), 0 0 30px rgba(255, 202, 40, 0.3);
-            }
-            50% {
-                box-shadow: 0 4px 25px rgba(255, 179, 0, 0.7), 0 0 45px rgba(255, 202, 40, 0.5);
-            }
-        }
-
-        .product-badge.mythic {
+            background: linear-gradient(135deg, #FFD700 0%, #FFC107 50%, #FFB300 100%); color: #1a1a2e;
+            box-shadow: 0 4px 20px rgba(255,193,7,0.5), 0 0 40px rgba(255,215,0,0.3), inset 0 2px 0 rgba(255,255,255,0.5), inset 0 -2px 0 rgba(0,0,0,0.1);
+            text-shadow: 0 1px 0 rgba(255,255,255,0.5); border: 2px solid rgba(255,255,255,0.6);
             animation: glow-gold 2.5s ease-in-out infinite;
         }
-
         .product-badge.seclira {
-            animation: glow-amber 2.5s ease-in-out infinite;
-            animation-delay: 1.25s;
+            background: linear-gradient(135deg, #FFCA28 0%, #FFB300 50%, #FFA000 100%); color: #1a1a2e;
+            box-shadow: 0 4px 20px rgba(255,179,0,0.5), 0 0 40px rgba(255,202,40,0.3), inset 0 2px 0 rgba(255,255,255,0.5), inset 0 -2px 0 rgba(0,0,0,0.1);
+            text-shadow: 0 1px 0 rgba(255,255,255,0.5); border: 2px solid rgba(255,255,255,0.6);
+            animation: glow-amber 2.5s ease-in-out infinite; animation-delay: 1.25s;
         }
-
-        /* Value Proposition */
+        @keyframes glow-gold { 0%, 100% { box-shadow: 0 4px 20px rgba(255,193,7,0.5), 0 0 30px rgba(255,215,0,0.3); } 50% { box-shadow: 0 4px 25px rgba(255,193,7,0.7), 0 0 45px rgba(255,215,0,0.5); } }
+        @keyframes glow-amber { 0%, 100% { box-shadow: 0 4px 20px rgba(255,179,0,0.5), 0 0 30px rgba(255,202,40,0.3); } 50% { box-shadow: 0 4px 25px rgba(255,179,0,0.7), 0 0 45px rgba(255,202,40,0.5); } }
         .value-prop {
-            padding: 20px 24px;
-            background: linear-gradient(to right, rgba(0, 74, 150, 0.03), rgba(33, 160, 210, 0.03));
-            border-left: 3px solid var(--basf-light-blue);
-            margin: 20px 24px;
-            border-radius: 0 12px 12px 0;
+            padding: 20px 24px; background: linear-gradient(to right, rgba(0,74,150,0.08), rgba(33,160,210,0.1));
+            border-left: 3px solid var(--basf-light-blue); margin: 20px 24px; border-radius: 0 12px 12px 0;
         }
-
-        .value-prop h3 {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--basf-blue);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .value-prop p {
-            font-size: 14px;
-            color: var(--basf-dark);
-            line-height: 1.6;
-        }
-
-        /* Contact Actions */
-        .contact-actions {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            padding: 0 24px 24px;
-        }
-
+        .value-prop h3 { font-size: 13px; font-weight: 600; color: var(--basf-blue); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .value-prop p { font-size: 14px; color: var(--basf-dark); line-height: 1.6; }
+        .contact-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 24px 24px; }
         .action-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            padding: 16px 12px;
-            background: var(--gray-light);
-            border-radius: 16px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 12px;
+            background: var(--gray-light); border-radius: 16px; text-decoration: none; transition: all 0.3s ease; cursor: pointer;
         }
-
-        .action-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-        }
-
-        .action-btn.call {
-            background: linear-gradient(135deg, #00c853, #69f0ae);
-        }
-
-        .action-btn.zalo {
-            background: linear-gradient(135deg, #0068ff, #00a1ff);
-        }
-
-        .action-btn.email {
-            background: linear-gradient(135deg, var(--basf-blue), var(--basf-light-blue));
-        }
-
-        .action-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--white);
-        }
-
-        .action-btn span {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--white);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* QR Section */
-        .qr-section {
-            padding: 24px;
-            background:
-                linear-gradient(180deg,
-                    rgba(0, 74, 150, 0.02) 0%,
-                    rgba(33, 160, 210, 0.06) 50%,
-                    rgba(0, 74, 150, 0.03) 100%);
-            border-top: 1px solid rgba(0, 74, 150, 0.08);
-            text-align: center;
-            position: relative;
-        }
-
-        .qr-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23004A96' fill-opacity='0.02'%3E%3Cpath d='M20 20h20v20H20V20zM0 0h20v20H0V0z'/%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
-        }
-
-        .qr-title {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-        }
-
-        .qr-code {
-            background: var(--white);
-            padding: 16px;
-            border-radius: 16px;
-            display: inline-block;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-
-        .qr-code img {
-            width: 140px;
-            height: 140px;
-            display: block;
-        }
-
-        .qr-hint {
-            font-size: 11px;
-            color: var(--gray);
-            margin-top: 12px;
-        }
-
-        /* Footer */
-        .card-footer {
-            padding: 20px 24px;
-            background: linear-gradient(135deg, #004A96 0%, #003366 100%);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='3' cy='3' r='1'/%3E%3Ccircle cx='13' cy='13' r='1'/%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
-        }
-
-        .footer-text {
-            font-size: 11px;
-            color: rgba(255,255,255,0.8);
-            letter-spacing: 0.5px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .footer-text strong {
-            color: var(--white);
-            font-weight: 600;
-        }
-
-        /* Save Contact Button */
+        .action-btn:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+        .action-btn.call { background: linear-gradient(135deg, #00c853, #69f0ae); }
+        .action-btn.zalo { background: linear-gradient(135deg, #0068ff, #00a1ff); }
+        .action-btn.email { background: linear-gradient(135deg, var(--basf-blue), var(--basf-light-blue)); }
+        .action-btn svg { width: 24px; height: 24px; fill: var(--white); }
+        .action-btn span { font-size: 11px; font-weight: 600; color: var(--white); text-transform: uppercase; letter-spacing: 0.5px; }
         .save-contact {
-            display: block;
-            width: calc(100% - 48px);
-            margin: 0 24px 24px;
-            padding: 16px;
-            background: linear-gradient(135deg, var(--basf-blue), var(--basf-light-blue));
-            color: var(--white);
-            font-size: 14px;
-            font-weight: 600;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(0, 74, 150, 0.3);
+            display: block; width: calc(100% - 48px); margin: 0 24px 24px; padding: 16px;
+            background: linear-gradient(135deg, var(--basf-blue), var(--basf-light-blue)); color: var(--white);
+            font-size: 14px; font-weight: 600; text-align: center; text-decoration: none; border-radius: 12px;
+            border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(0,74,150,0.3);
         }
-
-        .save-contact:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 74, 150, 0.4);
+        .save-contact:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,74,150,0.4); }
+        .save-contact.saving { background: linear-gradient(135deg, #00c853, #69f0ae); pointer-events: none; }
+        .qr-section {
+            padding: 24px; background: linear-gradient(180deg, rgba(0,74,150,0.15) 0%, rgba(33,160,210,0.2) 50%, rgba(0,74,150,0.12) 100%);
+            border-top: 1px solid rgba(0,74,150,0.2); text-align: center; position: relative;
         }
-
-        .save-contact.saving {
-            background: linear-gradient(135deg, #00c853, #69f0ae);
-            pointer-events: none;
+        .qr-title { font-size: 12px; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+        .qr-code {
+            background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(33,160,210,0.15) 100%);
+            padding: 16px; border-radius: 16px; display: inline-block; box-shadow: 0 4px 12px rgba(0,74,150,0.15); border: 1px solid rgba(0,74,150,0.15);
         }
-
-        /* Focus states for accessibility */
-        .action-btn:focus,
-        .save-contact:focus {
-            outline: 3px solid var(--gold-bright);
-            outline-offset: 2px;
+        .qr-code img { width: 140px; height: 140px; display: block; }
+        .qr-hint { font-size: 11px; color: var(--gray); margin-top: 12px; }
+        .card-footer {
+            padding: 20px 24px; background: linear-gradient(135deg, #004A96 0%, #003366 100%);
+            text-align: center; position: relative; overflow: hidden;
         }
-
-        .action-btn:focus-visible,
-        .save-contact:focus-visible {
-            outline: 3px solid var(--gold-bright);
-            outline-offset: 2px;
-        }
-
-        /* Toast Notification */
+        .footer-text { font-size: 11px; color: rgba(255,255,255,0.8); letter-spacing: 0.5px; position: relative; z-index: 1; }
+        .footer-text strong { color: var(--white); font-weight: 600; }
         .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--basf-dark);
-            color: white;
-            padding: 14px 24px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 500;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-            z-index: 1000;
-            opacity: 0;
-            transition: all 0.3s ease;
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: var(--basf-dark); color: white; padding: 14px 24px; border-radius: 12px;
+            font-size: 14px; font-weight: 500; box-shadow: 0 8px 24px rgba(0,0,0,0.3); z-index: 1000; opacity: 0; transition: all 0.3s ease;
         }
-
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
-        .toast.success {
-            background: linear-gradient(135deg, #00c853, #00e676);
-        }
-
-        .toast.info {
-            background: linear-gradient(135deg, var(--basf-blue), var(--basf-light-blue));
-        }
-
-        /* Instruction Overlay - Phase 3 */
-        .instruction-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1002;
-            animation: fadeIn 0.2s ease-out;
-        }
-
-        .instruction-overlay.show {
-            display: flex;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .instruction-card {
-            background: white;
-            padding: 28px 24px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 300px;
-            margin: 20px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-            animation: slideUp 0.3s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .instruction-icon {
-            font-size: 56px;
-            margin-bottom: 16px;
-            line-height: 1;
-        }
-
-        .instruction-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--basf-dark);
-            margin-bottom: 8px;
-        }
-
-        .instruction-text {
-            font-size: 15px;
-            color: var(--gray);
-            line-height: 1.5;
-            margin-bottom: 4px;
-        }
-
-        .instruction-highlight {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--basf-blue), var(--basf-light-blue));
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 14px;
-            margin-top: 8px;
-        }
-
-        .instruction-hint {
-            font-size: 12px;
-            color: var(--gray);
-            margin-top: 16px;
-            opacity: 0.8;
-        }
-
-        /* Platform Info Badge */
-        .platform-badge {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            display: none;
-        }
-
-        /* Responsive */
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .toast.success { background: linear-gradient(135deg, #00c853, #00e676); }
+        .toast.info { background: linear-gradient(135deg, var(--basf-blue), var(--basf-light-blue)); }
         @media (max-width: 380px) {
-            .card-header {
-                padding: 24px 20px 40px;
-            }
-            .profile-section, .contact-actions, .value-prop {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-            .name {
-                font-size: 20px;
-            }
-            .product-badge {
-                padding: 10px 18px;
-                font-size: 13px;
-            }
+            .card-header { padding: 24px 20px 40px; }
+            .profile-section, .contact-actions, .value-prop { padding-left: 20px; padding-right: 20px; }
+            .name { font-size: 20px; }
+            .product-badge { padding: 10px 18px; font-size: 13px; }
         }
     </style>
 </head>
 <body>
-    <div class="platform-badge" id="platformBadge"></div>
     <div class="toast" id="toast"></div>
-
-    <!-- Instruction Overlay for Android -->
-    <div class="instruction-overlay" id="instructionOverlay">
-        <div class="instruction-card">
-            <div class="instruction-icon">📱</div>
-            <div class="instruction-title">Bước tiếp theo</div>
-            <p class="instruction-text">Chọn ứng dụng <strong>"Danh bạ"</strong> hoặc <strong>"Contacts"</strong> từ menu sẽ hiện ra</p>
-            <span class="instruction-highlight">👆 Chọn Danh bạ</span>
-            <p class="instruction-hint">Đang mở menu chia sẻ...</p>
-        </div>
-    </div>
-
     <div class="card-container">
         <div class="card">
-            <!-- Header with Official BASF Logo -->
             <div class="card-header">
                 <div class="basf-logo">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212.6 76.78" preserveAspectRatio="xMinYMid">
@@ -642,332 +177,75 @@
                             <polygon class="cls-2" points="183.4 1.13 212.6 1.13 212.6 11.18 195.07 11.18 195.07 17.88 210.7 17.88 210.7 27.48 195.01 27.48 195.01 39.21 183.34 39.21 183.4 1.13"/>
                             <polygon class="cls-2" points="15.2 69.35 15.18 69.3 11.53 55.58 9.24 55.58 5.54 69.35 5.39 69.35 5.38 69.3 2.14 55.58 0.03 55.58 4.24 72 6.43 72 10.26 58.1 10.4 58.1 10.41 58.15 14.18 72 16.38 72 20.77 55.58 18.7 55.58 15.34 69.35 15.2 69.35"/>
                             <path class="cls-2" d="M30.66,62.54A5.23,5.23,0,0,0,29,60.88a4.89,4.89,0,0,0-2.62-.65,5.49,5.49,0,0,0-2.23.46A5.22,5.22,0,0,0,22.37,62a5.78,5.78,0,0,0-1.16,2,7.05,7.05,0,0,0-.42,2.48,9.76,9.76,0,0,0,.41,2.51,5.42,5.42,0,0,0,1.06,2A4.79,4.79,0,0,0,24,72.16a6.08,6.08,0,0,0,2.47.46,5.4,5.4,0,0,0,3.35-1,4.66,4.66,0,0,0,1.69-2.92H29.71a2.88,2.88,0,0,1-1.07,1.75,3.51,3.51,0,0,1-2.09.59,4.16,4.16,0,0,1-1.72-.33,3.4,3.4,0,0,1-1.2-.89,3.56,3.56,0,0,1-.69-1.27A5,5,0,0,1,22.75,67V67h9a9.6,9.6,0,0,0-.2-2.22,6.63,6.63,0,0,0-.87-2.21m-7.91,2.81v-.06A4.46,4.46,0,0,1,23.06,64a3.41,3.41,0,0,1,.71-1.1,3.25,3.25,0,0,1,1.07-.74,3.38,3.38,0,0,1,1.41-.28,3.31,3.31,0,0,1,1.38.28,3.54,3.54,0,0,1,1.09.73,3.48,3.48,0,0,1,.73,1.09,4.15,4.15,0,0,1,.31,1.35v.06Z" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M45.57,71a3.4,3.4,0,0,1-1.64-.38,3.21,3.21,0,0,1-1.1-1,4.34,4.34,0,0,1-.63-1.42,7,7,0,0,1-.2-1.64,8.64,8.64,0,0,1,.19-1.77,4.33,4.33,0,0,1,.62-1.51A3.27,3.27,0,0,1,44,62.24a3.86,3.86,0,0,1,1.82-.4,3.08,3.08,0,0,1,2,.64,3.17,3.17,0,0,1,1,1.75h1.91a4.61,4.61,0,0,0-.54-1.75,4,4,0,0,0-1.11-1.26,4.39,4.39,0,0,0-1.55-.75,7.22,7.22,0,0,0-1.9-.24,5.88,5.88,0,0,0-2.45.49,4.9,4.9,0,0,0-1.75,1.35,5.86,5.86,0,0,0-1,2,8.73,8.73,0,0,0-.35,2.5A8,8,0,0,0,40.4,69,5.37,5.37,0,0,0,41.45,71a4.63,4.63,0,0,0,1.74,1.23,6.19,6.19,0,0,0,2.4.44,5.14,5.14,0,0,0,3.58-1.19,5.41,5.41,0,0,0,1.63-3.32H48.91a3.49,3.49,0,0,1-1,2.14,3.29,3.29,0,0,1-2.32.78" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M56.83,60.87A5.4,5.4,0,0,0,55,63l0,0h-.06V60.51H53.2V72.36H55V67.1A8.56,8.56,0,0,1,55.27,65,4,4,0,0,1,56,63.49a3.22,3.22,0,0,1,1.37-1,5.77,5.77,0,0,1,2-.33v-2h-.14A4.24,4.24,0,0,0,56.83,60.87" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M69.44,62.54a5.29,5.29,0,0,0-1.67-1.66,4.89,4.89,0,0,0-2.62-.65,5.46,5.46,0,0,0-2.23.46A5.36,5.36,0,0,0,61.15,62a5.92,5.92,0,0,0-1.15,2,7.05,7.05,0,0,0-.42,2.48,9.77,9.77,0,0,0,.4,2.51,5.59,5.59,0,0,0,1.07,2,4.79,4.79,0,0,0,1.75,1.28,6,6,0,0,0,2.47.46,5.39,5.39,0,0,0,3.34-1,4.63,4.63,0,0,0,1.7-2.92H68.49a2.82,2.82,0,0,1-1.06,1.75,3.54,3.54,0,0,1-2.09.59,4.12,4.12,0,0,1-1.72-.33,3.43,3.43,0,0,1-1.21-.89,3.39,3.39,0,0,1-.68-1.27A5,5,0,0,1,61.54,67V67h9a9.57,9.57,0,0,0-.19-2.22,6.65,6.65,0,0,0-.88-2.21m-7.9,2.81v-.06A4.17,4.17,0,0,1,61.85,64a3.41,3.41,0,0,1,.71-1.1,3.15,3.15,0,0,1,1.07-.74,3.37,3.37,0,0,1,1.4-.28,3.24,3.24,0,0,1,1.38.28,3.38,3.38,0,0,1,1.82,1.82,4.16,4.16,0,0,1,.32,1.35v.06Z" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M82.47,70.66a4.41,4.41,0,0,1-.08-1V63.46A3.14,3.14,0,0,0,82,61.8a2.77,2.77,0,0,0-1-1,4.09,4.09,0,0,0-1.42-.46,9.47,9.47,0,0,0-3.49.09,4.69,4.69,0,0,0-1.58.67,3.47,3.47,0,0,0-1.09,1.22,4.17,4.17,0,0,0-.46,1.78h1.85a2,2,0,0,1,.93-1.78,4.26,4.26,0,0,1,2.12-.49,7.43,7.43,0,0,1,.94.07,2.68,2.68,0,0,1,.88.29,1.61,1.61,0,0,1,.65.62,2,2,0,0,1,.26,1.08,1.12,1.12,0,0,1-.35.89,2.29,2.29,0,0,1-.91.46,8.12,8.12,0,0,1-1.29.23c-.48,0-1,.13-1.54.24s-1,.21-1.49.35a4.08,4.08,0,0,0-1.28.6,3,3,0,0,0-.89,1,3.4,3.4,0,0,0-.34,1.63,3.49,3.49,0,0,0,.3,1.52,2.9,2.9,0,0,0,.84,1,3.62,3.62,0,0,0,1.24.57,6.68,6.68,0,0,0,1.52.17,6.23,6.23,0,0,0,2.3-.42,4.8,4.8,0,0,0,1.87-1.39l.11-.13v.17a1.8,1.8,0,0,0,.43,1.36,1.65,1.65,0,0,0,1.17.41,2.75,2.75,0,0,0,1.36-.28v-1.4a2,2,0,0,1-.54.09c-.35,0-.55-.12-.61-.37m-1.93-2.4a2.3,2.3,0,0,1-.21.91,2.71,2.71,0,0,1-.67.91,3.54,3.54,0,0,1-1.15.68,4.75,4.75,0,0,1-1.69.27,4.41,4.41,0,0,1-.89-.09,2.48,2.48,0,0,1-.76-.31,1.81,1.81,0,0,1-.53-.57,1.72,1.72,0,0,1-.2-.85A1.86,1.86,0,0,1,74.79,68a2.15,2.15,0,0,1,.89-.68A4.84,4.84,0,0,1,76.9,67c.42-.07.87-.13,1.33-.19a11,11,0,0,0,1.26-.21,2.37,2.37,0,0,0,1-.39l.1-.08Z" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M88.18,56.92H86.33v3.59h-2v1.61h2v7.69a4.65,4.65,0,0,0,.16,1.32,1.61,1.61,0,0,0,.48.76,1.9,1.9,0,0,0,.85.37,7,7,0,0,0,1.3.1h1.44V70.75h-.84c-.31,0-.56,0-.76,0a1.18,1.18,0,0,1-.48-.16.64.64,0,0,1-.24-.36,2.29,2.29,0,0,1-.06-.58v-7.5h2.46V60.51H88.18Z" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M101.79,62.54a5.29,5.29,0,0,0-1.67-1.66,4.89,4.89,0,0,0-2.62-.65,5.42,5.42,0,0,0-2.23.46A5.26,5.26,0,0,0,93.5,62a6.12,6.12,0,0,0-1.16,2,7.29,7.29,0,0,0-.41,2.48,9.91,9.91,0,0,0,.4,2.51,5.51,5.51,0,0,0,1.07,2,4.79,4.79,0,0,0,1.75,1.28,6,6,0,0,0,2.47.46,5.37,5.37,0,0,0,3.34-1,4.72,4.72,0,0,0,1.7-2.92h-1.82a2.88,2.88,0,0,1-1.07,1.75,3.48,3.48,0,0,1-2.08.59A4.12,4.12,0,0,1,96,70.7a3.43,3.43,0,0,1-1.21-.89,3.39,3.39,0,0,1-.68-1.27A4.67,4.67,0,0,1,93.89,67V67h9a9,9,0,0,0-.2-2.22,6.63,6.63,0,0,0-.87-2.21m-7.86,2.81v-.06A3.92,3.92,0,0,1,94.24,64a3.41,3.41,0,0,1,.71-1.1A3.15,3.15,0,0,1,96,62.12a3.38,3.38,0,0,1,1.41-.28,3.31,3.31,0,0,1,1.38.28,3.38,3.38,0,0,1,1.08.73,3.31,3.31,0,0,1,.73,1.09,4.1,4.1,0,0,1,.32,1.35v.06Z" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M116.73,71a3.33,3.33,0,0,1-1.63-.38,3.24,3.24,0,0,1-1.11-1,4.58,4.58,0,0,1-.63-1.42,6.88,6.88,0,0,1-.19-1.64,8.57,8.57,0,0,1,.18-1.77,4.66,4.66,0,0,1,.62-1.51,3.35,3.35,0,0,1,1.17-1.07,3.86,3.86,0,0,1,1.82-.4,3.08,3.08,0,0,1,2,.64,3.05,3.05,0,0,1,1,1.75h1.92a4.62,4.62,0,0,0-.55-1.75,4,4,0,0,0-1.1-1.26,4.61,4.61,0,0,0-1.56-.75,7.2,7.2,0,0,0-1.89-.24,5.9,5.9,0,0,0-2.46.49,5,5,0,0,0-1.75,1.35,5.86,5.86,0,0,0-1,2,8.73,8.73,0,0,0-.34,2.5,8.29,8.29,0,0,0,.35,2.45,5.53,5.53,0,0,0,1,1.91,4.63,4.63,0,0,0,1.74,1.23,6.22,6.22,0,0,0,2.4.44,5.18,5.18,0,0,0,3.59-1.19A5.46,5.46,0,0,0,122,68.11h-1.88a3.55,3.55,0,0,1-1,2.14,3.27,3.27,0,0,1-2.32.78" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M133.34,61.44a3.2,3.2,0,0,0-1.25-.89,5.23,5.23,0,0,0-2-.32,5.34,5.34,0,0,0-1.09.12,4.47,4.47,0,0,0-1.07.35,3.63,3.63,0,0,0-.92.62,2.64,2.64,0,0,0-.7.91l0,0h-.09V55.94h-1.84V72.36h1.84v-6.7a4.88,4.88,0,0,1,.23-1.51,3.36,3.36,0,0,1,.67-1.22,3.17,3.17,0,0,1,1.12-.81,4.3,4.3,0,0,1,1.59-.28,2.49,2.49,0,0,1,1.83.67,2.42,2.42,0,0,1,.67,1.81v8h1.85V64.55a7.4,7.4,0,0,0-.2-1.76,3.24,3.24,0,0,0-.67-1.35" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M146.57,62.54a5.29,5.29,0,0,0-1.67-1.66,4.89,4.89,0,0,0-2.62-.65,5.5,5.5,0,0,0-2.24.46A5.32,5.32,0,0,0,138.28,62a6.12,6.12,0,0,0-1.16,2,7.29,7.29,0,0,0-.41,2.48,9.84,9.84,0,0,0,.4,2.51,5.59,5.59,0,0,0,1.07,2,4.79,4.79,0,0,0,1.75,1.28,6,6,0,0,0,2.46.46,5.4,5.4,0,0,0,3.35-1,4.72,4.72,0,0,0,1.7-2.92h-1.82a2.88,2.88,0,0,1-1.07,1.75,3.49,3.49,0,0,1-2.09.59,4.11,4.11,0,0,1-1.71-.33,3.35,3.35,0,0,1-1.21-.89,3.39,3.39,0,0,1-.68-1.27,4.67,4.67,0,0,1-.19-1.51V67h9a9,9,0,0,0-.2-2.22,6.63,6.63,0,0,0-.87-2.21m-7.91,2.81v-.06A3.92,3.92,0,0,1,139,64a3.39,3.39,0,0,1,.7-1.1,3.42,3.42,0,0,1,2.48-1,3.24,3.24,0,0,1,1.38.28,3.38,3.38,0,0,1,1.82,1.82,4.16,4.16,0,0,1,.32,1.35v.06Z" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M165.61,61a3.55,3.55,0,0,0-1.23-.61,6.67,6.67,0,0,0-1.62-.19,4.4,4.4,0,0,0-2.13.53,4.21,4.21,0,0,0-1.57,1.48l-.07.11,0-.12a2.53,2.53,0,0,0-1.24-1.54,4.29,4.29,0,0,0-2-.46,4.44,4.44,0,0,0-3.89,2l0,0h-.07V60.51H150V72.36h1.84V65a2.8,2.8,0,0,1,.18-.88,3.43,3.43,0,0,1,1.58-1.88,3,3,0,0,1,1.51-.36,2.6,2.6,0,0,1,1.12.21,1.61,1.61,0,0,1,.71.57,2.27,2.27,0,0,1,.37.87,5.2,5.2,0,0,1,.11,1.08v7.79h1.84V65a3.09,3.09,0,0,1,.85-2.26,3.18,3.18,0,0,1,2.34-.86,2.77,2.77,0,0,1,1.2.22,1.72,1.72,0,0,1,.73.59,2,2,0,0,1,.36.87,5.87,5.87,0,0,1,.09,1v7.79h1.85V63.64a3.88,3.88,0,0,0-.29-1.56,2.61,2.61,0,0,0-.79-1" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M171.76,58.23h-1.84V55.94h1.84Zm0,2.28h-1.84V72.36h1.84Z" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M182.78,71.84a3.42,3.42,0,0,0,1.16-1.14,3.21,3.21,0,0,0,.45-1.77,2.78,2.78,0,0,0-.33-1.41,3.09,3.09,0,0,0-.86-.94A4.76,4.76,0,0,0,182,66a13.26,13.26,0,0,0-1.44-.4l-1.39-.31a8.63,8.63,0,0,1-1.26-.37,3,3,0,0,1-.94-.57,1.31,1.31,0,0,1-.13-1.69,1.75,1.75,0,0,1,.62-.48,3.16,3.16,0,0,1,.84-.25,4.94,4.94,0,0,1,1.88,0,3.29,3.29,0,0,1,.89.34,2.12,2.12,0,0,1,.67.63,2,2,0,0,1,.3.94h1.85a4.26,4.26,0,0,0-.45-1.73,3.07,3.07,0,0,0-1-1.13,4.4,4.4,0,0,0-1.49-.6,9.84,9.84,0,0,0-1.87-.17,7.16,7.16,0,0,0-1.57.19A5.33,5.33,0,0,0,176,61a3.17,3.17,0,0,0-1,1,2.84,2.84,0,0,0-.4,1.52,2.54,2.54,0,0,0,.57,1.76,3.74,3.74,0,0,0,1.42,1,10.57,10.57,0,0,0,1.88.56,18.16,18.16,0,0,1,1.89.44,5,5,0,0,1,1.47.64,1.39,1.39,0,0,1,.61,1.21,1.49,1.49,0,0,1-.3,1,1.69,1.69,0,0,1-.73.56,3.59,3.59,0,0,1-1,.26,6.26,6.26,0,0,1-2.17,0,2.9,2.9,0,0,1-1-.39,2.13,2.13,0,0,1-.76-.73,2.4,2.4,0,0,1-.31-1.08h-1.84a4.37,4.37,0,0,0,.45,1.8,3.44,3.44,0,0,0,1.1,1.23,4.44,4.44,0,0,0,1.57.67,9,9,0,0,0,3.7,0,5,5,0,0,0,1.62-.61" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M189.38,56.92h-1.84v3.59h-2v1.61h2v7.69a4.31,4.31,0,0,0,.16,1.32,1.47,1.47,0,0,0,.48.76,1.85,1.85,0,0,0,.85.37,6.87,6.87,0,0,0,1.3.1h1.44V70.75h-.84c-.31,0-.57,0-.76,0a1.08,1.08,0,0,1-.48-.16.66.66,0,0,1-.25-.36,2.29,2.29,0,0,1-.06-.58v-7.5h2.46V60.51h-2.46Z" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M196.42,63.14l0,0h-.07V60.51H194.6V72.36h1.85V67.24a8.62,8.62,0,0,1,.23-2.07,4,4,0,0,1,.76-1.54,3.22,3.22,0,0,1,1.37-1,5.71,5.71,0,0,1,2-.33v-2a4.38,4.38,0,0,0-2.54.64,5.47,5.47,0,0,0-1.82,2.13" transform="translate(-0.17 -0.36)"/>
-                            <path class="cls-2" d="M206.88,75.46a13.32,13.32,0,0,0,.68-1.48l5.18-13.47h-2l-3.36,9.8h-.14v0l-3.49-9.76h-2.08l4.72,11.85v0l-.81,2a2.33,2.33,0,0,1-.67.84,1.66,1.66,0,0,1-1,.29,1.86,1.86,0,0,1-.61-.1l-.49-.16V77a2.65,2.65,0,0,0,.62.14,5.34,5.34,0,0,0,.69,0,3.51,3.51,0,0,0,1.14-.17,2.68,2.68,0,0,0,.87-.54,4.24,4.24,0,0,0,.73-1" transform="translate(-0.17 -0.36)"/>
                         </g>
                     </svg>
                 </div>
             </div>
-
-            <!-- Profile -->
             <div class="profile-section">
                 <div class="profile-card">
                     <div class="avatar">
-                        <img src="./Avatar-TPH.jpg" alt="Triệu Phú Hữu" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:white;\'>TPH</div>';">
+                        <img src="./Avatar-TPH.jpg" alt="Triệu Phú Hữu" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:white;\">TPH</div>';">
                     </div>
                     <h1 class="name">Triệu Phú Hữu</h1>
                     <p class="title">Executive - Business Development</p>
                     <p class="division">Professional & Specialty Solutions</p>
-
                     <div class="product-badges">
                         <div class="product-badge mythic">Mythic</div>
                         <div class="product-badge seclira">Seclira</div>
                     </div>
                 </div>
             </div>
-
-            <!-- Value Proposition -->
             <div class="value-prop">
                 <h3>Cam kết của chúng tôi</h3>
                 <p>Đồng hành cùng quý khách hàng với giải pháp kiểm soát côn trùng chuyên nghiệp từ BASF — công ty hóa chất hàng đầu thế giới.</p>
             </div>
-
-            <!-- Contact Actions -->
             <div class="contact-actions">
                 <a href="tel:+84968229326" class="action-btn call">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
                     <span>Gọi ngay</span>
                 </a>
                 <a href="https://zalo.me/84968229326" class="action-btn zalo" target="_blank">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.06-7.44 7-7.93v2.02c-2.83.48-5 2.94-5 5.91s2.17 5.43 5 5.91v2.02zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.18 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.06-7.44 7-7.93v2.02c-2.83.48-5 2.94-5 5.91s2.17 5.43 5 5.91v2.02zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.18 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
                     <span>Zalo</span>
                 </a>
                 <a href="mailto:huu-phu.trieu@partners.basf.com" class="action-btn email">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                     <span>Email</span>
                 </a>
             </div>
-
-            <!-- Save Contact Button -->
-            <button type="button" class="save-contact" id="saveContactBtn">
-                📥 Lưu danh bạ
-            </button>
-
-            <!-- QR Code -->
+            <button type="button" class="save-contact" id="saveContactBtn">📱 Thêm vào Danh bạ</button>
             <div class="qr-section">
                 <div class="qr-title">Quét để xem danh thiếp</div>
                 <div class="qr-code">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fgoobee811.github.io%2FNameCard-TPH-Basfpss%2F" alt="QR Code - Danh thiếp điện tử">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fgoobee811.github.io%2FNameCard-TPH-Basfpss%2F" alt="QR Code">
                 </div>
                 <p class="qr-hint">Quét mã QR để mở danh thiếp trực tuyến</p>
             </div>
-
-            <!-- Footer -->
             <div class="card-footer">
-                <p class="footer-text">
-                    <strong>BASF</strong> — The world's leading chemical company
-                </p>
+                <p class="footer-text"><strong>BASF</strong> — The world's leading chemical company</p>
             </div>
         </div>
     </div>
-
     <script>
-        // Contact data configuration
-        const contactData = {
-            name: 'Triệu Phú Hữu',
-            firstName: 'Phú Hữu',
-            lastName: 'Triệu',
-            phone: '+84968229326',
-            email: 'huu-phu.trieu@partners.basf.com',
-            company: 'BASF Professional & Specialty Solutions',
-            title: 'Executive - Business Development',
-            note: 'Mythic | Seclira | Pest Control Solutions'
-        };
-
-        // Platform detection
-        const platform = {
-            isAndroid: /Android/i.test(navigator.userAgent),
-            isIOS: /iPhone|iPad|iPod/i.test(navigator.userAgent),
-            isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-        };
-
-        // Show platform badge for debugging (optional - can be removed in production)
-        const platformBadge = document.getElementById('platformBadge');
-        // platformBadge.style.display = 'block';
-        // platformBadge.textContent = platform.isAndroid ? 'Android' : platform.isIOS ? 'iOS' : 'Desktop';
-
-        // Toast notification function
-        function showToast(message, type = 'info') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast ' + type + ' show';
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // Instruction overlay functions (Phase 3)
-        function showInstruction() {
-            document.getElementById('instructionOverlay').classList.add('show');
-        }
-
-        function hideInstruction() {
-            document.getElementById('instructionOverlay').classList.remove('show');
-        }
-
-        // Helper: sleep function
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        // Generate vCard string
-        function generateVCard() {
-            return `BEGIN:VCARD
-VERSION:3.0
-FN:${contactData.name}
-N:${contactData.lastName};${contactData.firstName}
-ORG:${contactData.company}
-TITLE:${contactData.title}
-TEL;TYPE=CELL:${contactData.phone}
-EMAIL:${contactData.email}
-NOTE:${contactData.note}
-END:VCARD`;
-        }
-
-        // Method 1: Android Intent - Opens Contacts app with pre-filled data
-        function saveContactAndroid() {
-            // Build Android Intent URL
-            const intentUrl = `intent://contacts/#Intent;` +
-                `action=android.intent.action.INSERT;` +
-                `type=vnd.android.cursor.dir/contact;` +
-                `S.name=${encodeURIComponent(contactData.name)};` +
-                `S.phone=${encodeURIComponent(contactData.phone)};` +
-                `S.email=${encodeURIComponent(contactData.email)};` +
-                `S.company=${encodeURIComponent(contactData.company)};` +
-                `S.job_title=${encodeURIComponent(contactData.title)};` +
-                `S.notes=${encodeURIComponent(contactData.note)};` +
-                `end`;
-
-            // Alternative: Using Google Contacts deeplink
-            const googleContactsUrl = `https://contacts.google.com/new?` +
-                `name=${encodeURIComponent(contactData.name)}&` +
-                `phone=${encodeURIComponent(contactData.phone)}&` +
-                `email=${encodeURIComponent(contactData.email)}&` +
-                `company=${encodeURIComponent(contactData.company)}&` +
-                `title=${encodeURIComponent(contactData.title)}`;
-
-            // Try Intent first, fallback to vCard
-            try {
-                window.location.href = intentUrl;
-                showToast('Đang mở ứng dụng Danh bạ...', 'info');
-
-                // Fallback after 2 seconds if Intent doesn't work
-                setTimeout(() => {
-                    saveContactVCard();
-                }, 2000);
-            } catch (e) {
-                saveContactVCard();
-            }
-        }
-
-        // Method 2: Web Share API with vCard (works on modern mobile browsers)
-        async function saveContactWebShare() {
-            const vcard = generateVCard();
-            const blob = new Blob([vcard], { type: 'text/vcard' });
-            const file = new File([blob], 'Trieu-Phu-Huu-BASF.vcf', { type: 'text/vcard' });
-
-            if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-                try {
-                    await navigator.share({
-                        files: [file],
-                        title: contactData.name,
-                        text: `Danh thiếp của ${contactData.name} - ${contactData.company}`
-                    });
-                    showToast('Đã chia sẻ danh thiếp!', 'success');
-                    return true;
-                } catch (err) {
-                    if (err.name !== 'AbortError') {
-                        console.log('Web Share failed:', err);
-                        return false;
-                    }
-                    return true; // User cancelled - don't try fallback
-                }
-            }
-            return false;
-        }
-
-        // Method 3: Download vCard file (universal fallback)
-        function saveContactVCard() {
-            const vcard = generateVCard();
-            const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'Trieu-Phu-Huu-BASF.vcf';
-            link.style.display = 'none';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-
-            showToast('📥 Tải file danh bạ thành công! Mở file để lưu.', 'success');
-        }
-
-        // Method 4: ContactsManager API (experimental - Chrome 80+)
-        async function saveContactAPI() {
-            if ('contacts' in navigator && 'ContactsManager' in window) {
-                try {
-                    // Note: ContactsManager only supports READ, not write
-                    // This is just for future reference when write support is added
-                    showToast('API Contacts chưa hỗ trợ ghi trực tiếp', 'info');
-                    return false;
-                } catch (e) {
-                    return false;
-                }
-            }
-            return false;
-        }
-
-        // Main save contact function - Optimized platform-specific routing
+        const contactData = { name: 'Hữu BASF', phone: '+84968229326', email: 'huu-phu.trieu@partners.basf.com', company: 'BASF Professional & Specialty Solutions', title: 'Executive - Business Development', note: 'Mythic | Seclira | Pest Control Solutions' };
+        const platform = { isAndroid: /Android/i.test(navigator.userAgent), isIOS: /iPhone|iPad|iPod/i.test(navigator.userAgent), isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) };
+        function showToast(message, type = 'info', duration = 3000) { const toast = document.getElementById('toast'); toast.textContent = message; toast.className = 'toast ' + type + ' show'; setTimeout(() => toast.classList.remove('show'), duration); }
+        function generateVCard() { return `BEGIN:VCARD\nVERSION:3.0\nFN:${contactData.name}\nN:BASF;Hữu;;;\nORG:${contactData.company}\nTITLE:${contactData.title}\nTEL;TYPE=CELL:${contactData.phone}\nEMAIL:${contactData.email}\nNOTE:${contactData.note}\nEND:VCARD`; }
+        function buildAndroidIntent() { return `intent://contacts/#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/contact;S.name=${encodeURIComponent(contactData.name)};S.phone=${encodeURIComponent(contactData.phone)};S.email=${encodeURIComponent(contactData.email)};S.company=${encodeURIComponent(contactData.company)};S.job_title=${encodeURIComponent(contactData.title)};end`; }
+        function downloadVCard() { const vcard = generateVCard(); const dataUrl = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcard); const link = document.createElement('a'); link.href = dataUrl; link.download = 'Huu-BASF.vcf'; link.style.display = 'none'; document.body.appendChild(link); link.click(); document.body.removeChild(link); }
+        function resetButton(btn, success = false) { btn.classList.remove('saving'); if (success) { btn.innerHTML = '✅ Đã mở Danh bạ!'; setTimeout(() => updateButtonText(), 2000); } else { updateButtonText(); } }
+        function updateButtonText() { const btn = document.getElementById('saveContactBtn'); if (platform.isAndroid) { btn.innerHTML = '📱 Thêm vào Danh bạ'; } else if (platform.isIOS) { btn.innerHTML = '📥 Tải danh bạ'; } else { btn.innerHTML = '📥 Tải file danh bạ'; } }
         async function saveContact() {
-            const btn = document.getElementById('saveContactBtn');
-            btn.classList.add('saving');
-            btn.innerHTML = '⏳ Đang xử lý...';
-
+            const btn = document.getElementById('saveContactBtn'); btn.classList.add('saving'); btn.innerHTML = '⏳ Đang mở...';
             try {
-                // ===== PHASE 1: iOS - Direct vCard (one-tap, auto-opens Contacts) =====
-                if (platform.isIOS) {
-                    showToast('📥 Đang mở Danh bạ...', 'info');
-                    saveContactVCard();
-                    btn.classList.remove('saving');
-                    btn.innerHTML = '✅ Đã mở Danh bạ!';
-                    setTimeout(() => {
-                        btn.innerHTML = '📥 Lưu danh bạ';
-                    }, 2000);
-                    return;
-                }
-
-                // ===== PHASE 2: Android - Web Share with instruction overlay =====
-                if (platform.isAndroid) {
-                    // Show instruction overlay first
-                    showInstruction();
-
-                    // Wait 800ms for user to read instruction
-                    await sleep(800);
-
-                    // Try Web Share API
-                    const shared = await saveContactWebShare();
-
-                    // Hide instruction
-                    hideInstruction();
-
-                    if (shared) {
-                        btn.classList.remove('saving');
-                        btn.innerHTML = '✅ Đã chia sẻ!';
-                        setTimeout(() => {
-                            btn.innerHTML = '📥 Lưu danh bạ';
-                        }, 2000);
-                        return;
-                    }
-
-                    // Fallback if Web Share not supported/failed
-                    showToast('📥 Tải file danh bạ - mở để lưu', 'info');
-                    saveContactVCard();
-                    btn.classList.remove('saving');
-                    btn.innerHTML = '📥 Lưu danh bạ';
-                    return;
-                }
-
-                // ===== Desktop fallback - vCard download =====
-                showToast('📥 Tải file xong! Mở file để thêm vào Danh bạ', 'info');
-                saveContactVCard();
-
-            } catch (error) {
-                console.error('Save contact error:', error);
-                hideInstruction();
-                saveContactVCard();
-            }
-
-            btn.classList.remove('saving');
-            btn.innerHTML = '📥 Lưu danh bạ';
+                if (platform.isAndroid) { window.location.href = buildAndroidIntent(); showToast('Nhấn "Lưu" trong Danh bạ để hoàn tất', 'info', 4000); setTimeout(() => { if (document.hasFocus()) { downloadVCard(); showToast('Mở file để thêm vào Danh bạ', 'info'); } resetButton(btn); }, 2000); return; }
+                if (platform.isIOS) { downloadVCard(); showToast('Nhấn vào file vừa tải → Chọn "Tạo liên hệ mới"', 'info', 5000); resetButton(btn); return; }
+                downloadVCard(); showToast('File đã tải xuống. Mở để thêm vào Danh bạ.', 'info'); resetButton(btn);
+            } catch (error) { console.error('Save contact error:', error); downloadVCard(); showToast('Mở file để thêm vào Danh bạ', 'info'); resetButton(btn); }
         }
-
-        // Event listeners
         document.getElementById('saveContactBtn').addEventListener('click', saveContact);
-
-        // Touch effects for action buttons
-        document.querySelectorAll('.action-btn').forEach(btn => {
-            btn.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.95)';
-            });
-            btn.addEventListener('touchend', function() {
-                this.style.transform = '';
-            });
-        });
-
-        // Log for analytics
-        console.log('Name Card loaded:', contactData.name);
-        console.log('Platform:', platform.isAndroid ? 'Android' : platform.isIOS ? 'iOS' : 'Desktop');
+        document.querySelectorAll('.action-btn').forEach(btn => { btn.addEventListener('touchstart', function() { this.style.transform = 'scale(0.95)'; }); btn.addEventListener('touchend', function() { this.style.transform = ''; }); });
+        document.addEventListener('DOMContentLoaded', updateButtonText);
     </script>
 </body>
 </html>
