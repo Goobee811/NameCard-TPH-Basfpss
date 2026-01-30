@@ -184,7 +184,7 @@
             <div class="profile-section">
                 <div class="profile-card">
                     <div class="avatar">
-                        <img src="./Avatar-TPH.jpg" alt="Triệu Phú Hữu" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:white;\">TPH</div>';">
+                        <img src="./Avatar-TPH.jpg" alt="Triệu Phú Hữu" id="avatarImg">
                     </div>
                     <h1 class="name">Triệu Phú Hữu</h1>
                     <p class="title">Executive - Business Development</p>
@@ -246,6 +246,14 @@
         document.getElementById('saveContactBtn').addEventListener('click', saveContact);
         document.querySelectorAll('.action-btn').forEach(btn => { btn.addEventListener('touchstart', function() { this.style.transform = 'scale(0.95)'; }); btn.addEventListener('touchend', function() { this.style.transform = ''; }); });
         document.addEventListener('DOMContentLoaded', updateButtonText);
+        // Avatar fallback handler (moved from inline to avoid quote escaping issues)
+        const avatarImg = document.getElementById('avatarImg');
+        if (avatarImg) {
+            avatarImg.onerror = function() {
+                this.style.display = 'none';
+                this.parentElement.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:white;">TPH</div>';
+            };
+        }
     </script>
 </body>
 </html>
