@@ -2,14 +2,20 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Hữu BASF | Danh thiếp điện tử</title>
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#004A96">
 
-    <!-- iOS PWA Support -->
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-192.png">
+
+    <!-- iOS/Android PWA Support -->
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Hữu BASF">
@@ -72,9 +78,11 @@
             background: linear-gradient(135deg, var(--basf-blue), var(--basf-light-blue));
         }
         .avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 90% 15%; }
-        .name { font-size: 24px; font-weight: 700; color: var(--basf-dark); margin-bottom: 8px; }
-        .title { font-size: 14px; font-weight: 500; color: var(--basf-blue); margin-bottom: 4px; }
-        .division { font-size: 13px; color: var(--gray); margin-bottom: 16px; }
+        /* Avatar fallback - shows initials when image fails */
+        .avatar-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; color: white; }
+        .name { font-size: 24px; font-weight: 700; color: var(--basf-dark); margin-bottom: 8px; text-decoration: none; }
+        .title { font-size: 14px; font-weight: 500; color: var(--basf-blue); margin-bottom: 4px; text-decoration: none; }
+        .division { font-size: 13px; color: var(--gray); margin-bottom: 16px; text-decoration: none !important; }
         .product-badges { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
         .product-badge {
             position: relative; padding: 12px 24px; border-radius: 30px; font-size: 15px; font-weight: 800;
@@ -184,11 +192,12 @@
             <div class="profile-section">
                 <div class="profile-card">
                     <div class="avatar">
-                        <img src="./Avatar-TPH.jpg" alt="Triệu Phú Hữu" id="avatarImg">
+                        <img src="./Avatar-TPH.jpg" alt="Triệu Phú Hữu" id="avatarImg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <div class="avatar-fallback" style="display:none;">TPH</div>
                     </div>
                     <h1 class="name">Triệu Phú Hữu</h1>
                     <p class="title">Executive - Business Development</p>
-                    <p class="division">Professional & Specialty Solutions</p>
+                    <p class="division">Professional &amp; Specialty Solutions</p>
                     <div class="product-badges">
                         <div class="product-badge mythic">Mythic</div>
                         <div class="product-badge seclira">Seclira</div>
@@ -246,14 +255,6 @@
         document.getElementById('saveContactBtn').addEventListener('click', saveContact);
         document.querySelectorAll('.action-btn').forEach(btn => { btn.addEventListener('touchstart', function() { this.style.transform = 'scale(0.95)'; }); btn.addEventListener('touchend', function() { this.style.transform = ''; }); });
         document.addEventListener('DOMContentLoaded', updateButtonText);
-        // Avatar fallback handler (moved from inline to avoid quote escaping issues)
-        const avatarImg = document.getElementById('avatarImg');
-        if (avatarImg) {
-            avatarImg.onerror = function() {
-                this.style.display = 'none';
-                this.parentElement.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:white;">TPH</div>';
-            };
-        }
     </script>
 </body>
 </html>
