@@ -145,6 +145,12 @@
         }
         .qr-code img { width: 140px; height: 140px; display: block; }
         .qr-hint { font-size: 11px; color: var(--basf-blue); margin-top: 12px; opacity: 0.85; }
+        .address-section { padding: 16px 24px; text-align: center; background: rgba(0,74,150,0.05); border-top: 1px solid rgba(0,74,150,0.1); }
+        .address-link { display: inline-flex; align-items: flex-start; gap: 8px; text-decoration: none; color: var(--basf-dark); font-size: 12px; line-height: 1.5; transition: color 0.2s; }
+        .address-link:hover { color: var(--basf-blue); }
+        .address-link svg { flex-shrink: 0; width: 16px; height: 16px; fill: var(--basf-blue); margin-top: 2px; }
+        .address-text { text-align: left; }
+        .address-note { font-size: 11px; color: var(--gray); font-style: italic; }
         .card-footer {
             padding: 16px 24px; background: linear-gradient(135deg, var(--basf-blue) 0%, var(--basf-light-blue) 100%);
             text-align: center; position: relative; overflow: hidden;
@@ -252,6 +258,16 @@
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fgoobee811.github.io%2FNameCard-TPH-Basfpss%2F" alt="QR Code">
                 </div>
                 <p class="qr-hint">Quét mã QR để mở danh thiếp trực tuyến</p>
+            </div>
+            <div class="address-section">
+                <a href="https://www.google.com/maps/place/Deutsches+Haus+Ho+Chi+Minh+City/@10.7820367,106.7003953,17z" target="_blank" class="address-link">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <span class="address-text">
+                        Tầng 23 Tòa nhà Deutsches Haus<br>
+                        33 Lê Duẩn, P. Bến Nghé, Q.1, TP.HCM<br>
+                        <span class="address-note">(Tòa nhà Tổng lãnh sự quán Đức)</span>
+                    </span>
+                </a>
             </div>
             <div class="card-footer">
                 <p class="footer-text"><strong>BASF</strong> — The world's leading chemical company</p>
