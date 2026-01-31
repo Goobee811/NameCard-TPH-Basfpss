@@ -260,7 +260,7 @@
                 <p class="qr-hint">Quét mã QR để mở danh thiếp trực tuyến</p>
             </div>
             <div class="address-section">
-                <a href="https://www.google.com/maps/place/Deutsches+Haus+Ho+Chi+Minh+City/@10.7820367,106.7003953,17z" target="_blank" class="address-link">
+                <a href="#" id="addressLink" class="address-link">
                     <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                     <span class="address-text">
                         Tầng 23 Tòa nhà Deutsches Haus<br>
@@ -293,6 +293,22 @@
         }
         document.getElementById('saveContactBtn').addEventListener('click', saveContact);
         document.querySelectorAll('.action-btn').forEach(btn => { btn.addEventListener('touchstart', function() { this.style.transform = 'scale(0.95)'; }); btn.addEventListener('touchend', function() { this.style.transform = ''; }); });
+        // Address/Maps handler - uses geo: URI for Android, Apple Maps for iOS, HTTPS for desktop
+        const addressData = { lat: 10.7820367, lng: 106.7003953, label: 'Deutsches Haus Ho Chi Minh City' };
+        function openMaps(e) {
+            e.preventDefault();
+            let url;
+            if (platform.isAndroid) {
+                url = `geo:${addressData.lat},${addressData.lng}?q=${addressData.lat},${addressData.lng}(${encodeURIComponent(addressData.label)})`;
+            } else if (platform.isIOS) {
+                url = `maps://maps.apple.com/?q=${encodeURIComponent(addressData.label)}&ll=${addressData.lat},${addressData.lng}`;
+            } else {
+                url = `https://maps.google.com/?q=${addressData.lat},${addressData.lng}`;
+                window.open(url, '_blank'); return;
+            }
+            window.location.href = url;
+        }
+        document.getElementById('addressLink').addEventListener('click', openMaps);
         document.addEventListener('DOMContentLoaded', updateButtonText);
     </script>
 </body>
