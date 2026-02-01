@@ -17,10 +17,11 @@
     <meta name="twitter:title" content="Triệu Phú Hữu - BASF">
     <meta name="twitter:description" content="Danh thiếp điện tử | Mythic & Seclira Solutions">
 
-    <!-- Fonts -->
+    <!-- Fonts - Async loading for better performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
     <style>
         :root {
@@ -39,12 +40,22 @@
             --gradient-success: linear-gradient(135deg, #00c853, #69f0ae);
             --gradient-zalo: linear-gradient(135deg, #0068ff, #00a1ff);
 
-            /* Spacing Scale */
+            /* Spacing Scale - Complete system */
+            --space-2xs: 4px;
             --space-xs: 8px;
             --space-sm: 12px;
             --space-md: 16px;
             --space-lg: 24px;
             --space-xl: 28px;
+            --space-2xl: 48px;
+            --space-negative-lg: -24px;
+
+            /* Size Tokens */
+            --avatar-size: 110px;
+            --qr-size: 140px;
+            --badge-radius: 30px;
+            --min-touch-target: 44px;
+            --toast-offset: 100px;
 
             /* Border Radius */
             --radius-sm: 12px;
@@ -57,6 +68,14 @@
             --shadow-md: 0 10px 40px rgba(0, 74, 150, 0.15);
             --shadow-lg: 0 25px 50px -12px rgba(0, 74, 150, 0.4);
             --shadow-hover: 0 8px 24px rgba(0, 74, 150, 0.4);
+
+            /* Transition Utilities */
+            --transition-interactive: transform 0.3s ease, box-shadow 0.3s ease;
+            --transition-fast: all 0.2s ease;
+
+            /* High contrast colors for accessibility (WCAG AA compliant) */
+            --text-dark-high-contrast: #001a33;
+            --text-medium-high-contrast: #0d0d1a;
         }
 
         * {
@@ -72,7 +91,26 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: var(--space-md);
+        }
+
+        /* Skip Link for Accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--basf-blue);
+            color: var(--white);
+            padding: var(--space-xs) var(--space-md);
+            text-decoration: none;
+            z-index: 100;
+            border-radius: 0 0 var(--space-2xs) 0;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .skip-link:focus {
+            top: 0;
         }
 
         .card-container {
@@ -96,7 +134,7 @@
         /* Header */
         .card-header {
             background: var(--gradient-basf);
-            padding: var(--space-xl) var(--space-lg) 48px;
+            padding: var(--space-xl) var(--space-lg) var(--space-2xl);
             position: relative;
             overflow: hidden;
         }
@@ -110,6 +148,7 @@
             height: 200%;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
             animation: pulse 4s ease-in-out infinite;
+            will-change: transform, opacity;
         }
 
         @keyframes pulse {
@@ -131,7 +170,7 @@
         /* Profile Section */
         .profile-section {
             padding: 0 var(--space-lg);
-            margin-top: -24px;
+            margin-top: var(--space-negative-lg);
             position: relative;
             z-index: 2;
         }
@@ -145,11 +184,11 @@
         }
 
         .avatar {
-            width: 110px;
-            height: 110px;
+            width: var(--avatar-size);
+            height: var(--avatar-size);
             border-radius: var(--radius-full);
             margin: 0 auto var(--space-md);
-            box-shadow: 0 8px 24px rgba(0, 74, 150, 0.3);
+            box-shadow: var(--shadow-sm);
             border: 4px solid var(--white);
             overflow: hidden;
             background: var(--gradient-basf);
@@ -184,7 +223,7 @@
             font-size: 14px;
             font-weight: 600;
             color: #003d7a;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-2xs);
         }
 
         .division {
@@ -205,14 +244,14 @@
         .product-badge {
             position: relative;
             padding: var(--space-sm) var(--space-lg);
-            border-radius: 30px;
+            border-radius: var(--badge-radius);
             font-size: 15px;
             font-weight: 800;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             overflow: hidden;
             cursor: default;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: var(--transition-interactive);
         }
 
         .product-badge::before {
@@ -224,6 +263,7 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
             animation: shimmer 2s infinite;
+            will-change: left;
         }
 
         @keyframes shimmer {
@@ -262,34 +302,32 @@
             50% { box-shadow: 0 4px 25px var(--glow-max), 0 0 45px var(--glow-max); }
         }
 
-        /* Value Proposition */
+        /* Value Proposition - White text like footer */
         .value-prop {
-            padding: 20px var(--space-lg);
-            background: linear-gradient(to right, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.15));
-            margin: 20px var(--space-lg);
+            padding: var(--space-md) var(--space-lg);
+            background: linear-gradient(135deg, rgba(0, 74, 150, 0.85) 0%, rgba(33, 160, 210, 0.75) 100%);
+            margin: var(--space-md) var(--space-lg);
             border-radius: var(--radius-sm);
-            box-shadow: 0 2px 12px rgba(0, 74, 150, 0.1), inset 4px 0 0 rgba(0, 74, 150, 0.6);
+            box-shadow: 0 2px 12px rgba(0, 74, 150, 0.2), inset 4px 0 0 rgba(255, 255, 255, 0.3);
         }
 
         .value-prop h2 {
             font-size: 13px;
             font-weight: 700;
-            color: #003366;
+            color: var(--white);
             margin-bottom: var(--space-xs);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
         }
 
         .value-prop p {
             font-size: 14px;
-            color: #1a1a2e;
+            color: rgba(255, 255, 255, 0.95);
             line-height: 1.6;
-            font-weight: 600;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.85);
+            font-weight: 500;
         }
 
-        /* Contact Actions */
+        /* Contact Actions - Fixed touch targets */
         .contact-actions {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -301,12 +339,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: var(--space-xs);
-            padding: var(--space-md) var(--space-sm);
+            padding: var(--space-sm);
+            min-height: var(--min-touch-target);
+            min-width: var(--min-touch-target);
             background: var(--gray-light);
             border-radius: var(--radius-md);
             text-decoration: none;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: var(--transition-interactive);
             cursor: pointer;
         }
 
@@ -333,7 +374,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* QR Section */
+        /* QR Section - Fixed contrast */
         .qr-section {
             padding: var(--space-lg);
             background: linear-gradient(180deg, rgba(0, 74, 150, 0.15) 0%, rgba(33, 160, 210, 0.2) 50%, rgba(0, 74, 150, 0.12) 100%);
@@ -351,17 +392,32 @@
         }
 
         .qr-code img {
-            width: 140px;
-            height: 140px;
+            width: var(--qr-size);
+            height: var(--qr-size);
             display: block;
+        }
+
+        /* QR Fallback placeholder */
+        .qr-placeholder {
+            width: var(--qr-size);
+            height: var(--qr-size);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-light);
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            color: var(--basf-dark);
+            text-align: center;
+            padding: var(--space-sm);
         }
 
         .qr-hint {
             font-size: 12px;
-            color: var(--white);
+            color: var(--text-dark-high-contrast);
             margin-top: var(--space-sm);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+            font-weight: 600;
         }
 
         /* Address Section */
@@ -380,7 +436,9 @@
             color: var(--basf-dark);
             font-size: 12px;
             line-height: 1.5;
-            transition: color 0.2s;
+            transition: var(--transition-fast);
+            padding: var(--space-xs);
+            min-height: var(--min-touch-target);
         }
 
         .address-link:hover { color: var(--basf-blue); }
@@ -404,7 +462,7 @@
 
         /* Footer */
         .card-footer {
-            padding: 20px var(--space-lg);
+            padding: var(--space-md) var(--space-lg);
             background: linear-gradient(135deg, #004A96 0%, #003366 100%);
             text-align: center;
         }
@@ -423,9 +481,10 @@
         /* Save Contact Button */
         .save-contact {
             display: block;
-            width: calc(100% - 48px);
+            width: calc(100% - var(--space-2xl));
             margin: 0 var(--space-lg) var(--space-lg);
             padding: var(--space-md);
+            min-height: var(--min-touch-target);
             background: var(--gradient-basf);
             color: var(--white);
             font-size: 14px;
@@ -435,7 +494,7 @@
             border-radius: var(--radius-sm);
             border: none;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: var(--transition-interactive);
             box-shadow: var(--shadow-sm);
         }
 
@@ -452,12 +511,13 @@
         /* Focus states for accessibility */
         .action-btn:focus,
         .save-contact:focus,
-        .address-link:focus {
+        .address-link:focus,
+        .lang-toggle:focus {
             outline: 3px solid #FFD700;
             outline-offset: 2px;
         }
 
-        /* Language Toggle */
+        /* Language Toggle - Fixed touch target */
         .lang-toggle {
             position: absolute;
             top: var(--space-md);
@@ -465,27 +525,24 @@
             z-index: 10;
             display: flex;
             align-items: center;
-            gap: 4px;
-            padding: 8px 12px;
+            gap: var(--space-2xs);
+            padding: 10px 14px;
+            min-width: var(--min-touch-target);
+            min-height: var(--min-touch-target);
             background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
+            border-radius: 22px;
             cursor: pointer;
             font-family: inherit;
             font-size: 12px;
             font-weight: 600;
             letter-spacing: 0.5px;
-            transition: background 0.2s ease, transform 0.2s ease;
+            transition: var(--transition-fast);
         }
 
         .lang-toggle:hover {
             background: rgba(255, 255, 255, 0.25);
             transform: scale(1.02);
-        }
-
-        .lang-toggle:focus {
-            outline: 3px solid #FFD700;
-            outline-offset: 2px;
         }
 
         .lang-toggle:active {
@@ -494,7 +551,7 @@
 
         .lang-option {
             color: rgba(255, 255, 255, 0.7);
-            transition: color 0.2s ease;
+            transition: var(--transition-fast);
         }
 
         .lang-option.active {
@@ -519,12 +576,12 @@
         /* Toast Notification */
         .toast {
             position: fixed;
-            bottom: 20px;
+            bottom: var(--space-md);
             left: 50%;
-            transform: translateX(-50%) translateY(100px);
+            transform: translateX(-50%) translateY(var(--toast-offset));
             background: var(--basf-dark);
             color: white;
-            padding: 14px 24px;
+            padding: 14px var(--space-lg);
             border-radius: var(--radius-sm);
             font-size: 14px;
             font-weight: 500;
@@ -552,38 +609,38 @@
             }
             .lang-toggle,
             .lang-option,
-            .i18n-fade {
+            .i18n-fade,
+            .toast {
                 transition-duration: 0.01ms !important;
             }
         }
 
-        /* Language toggle responsive */
+        /* Responsive - Single merged media query */
         @media (max-width: 380px) {
+            .card-header { padding: var(--space-lg) var(--space-md) 40px; }
+            .profile-section,
+            .contact-actions,
+            .value-prop { padding-left: var(--space-md); padding-right: var(--space-md); }
+            .name { font-size: 20px; }
+            .product-badge { padding: 10px 18px; font-size: 13px; }
             .lang-toggle {
-                padding: 6px 10px;
+                padding: var(--space-xs) var(--space-sm);
                 font-size: 11px;
                 top: var(--space-sm);
                 right: var(--space-sm);
             }
         }
-
-        /* Responsive */
-        @media (max-width: 380px) {
-            .card-header { padding: var(--space-lg) 20px 40px; }
-            .profile-section,
-            .contact-actions,
-            .value-prop { padding-left: 20px; padding-right: 20px; }
-            .name { font-size: 20px; }
-            .product-badge { padding: 10px 18px; font-size: 13px; }
-        }
     </style>
 </head>
 
 <body>
+    <!-- Skip Link for Keyboard Users -->
+    <a href="#main-content" class="skip-link">Nhảy đến nội dung chính</a>
+
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <div class="card-container">
-        <article class="card">
+        <article class="card" id="main-content">
             <!-- Header with BASF Logo -->
             <header class="card-header">
                 <button
@@ -660,7 +717,10 @@
             <!-- QR Code -->
             <section class="qr-section i18n-fade" aria-label="Mã QR" data-i18n-aria="aria.qrSection">
                 <div class="qr-code">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fgoobee811.github.io%2FNameCard-TPH-Basfpss%2F" alt="Mã QR danh thiếp điện tử" loading="lazy">
+                    <img id="qrCodeImg" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fgoobee811.github.io%2FNameCard-TPH-Basfpss%2F" alt="Mã QR danh thiếp điện tử" loading="lazy">
+                    <div id="qrPlaceholder" class="qr-placeholder" style="display:none;">
+                        <span>QR unavailable<br>goobee811.github.io/NameCard-TPH-Basfpss</span>
+                    </div>
                 </div>
                 <p class="qr-hint" data-i18n="qr.hint">Quét mã QR để mở danh thiếp trực tuyến</p>
             </section>
@@ -689,15 +749,75 @@
     </div>
 
     <script>
+    /**
+     * Electronic Name Card - Triệu Phú Hữu (BASF)
+     * Version 3.0 - Optimized & Accessible
+     *
+     * Fixes applied:
+     * - IIFE wrapper to prevent global scope pollution
+     * - Safe localStorage with try-catch
+     * - Improved platform detection (iPad desktop mode)
+     * - QR code error handler with fallback
+     * - Single source of truth for contact data
+     * - Comprehensive error handling
+     */
+    (function() {
+        'use strict';
+
+        // ========================================
+        // SINGLE SOURCE OF TRUTH - CONTACT DATA
+        // ========================================
+        const CONTACT_INFO = {
+            fullName: 'Triệu Phú Hữu',
+            businessName: 'Hữu BASF',
+            firstName: 'Hữu',
+            lastName: 'BASF',
+            phone: '+84968229326',
+            email: 'huu-phu.trieu@partners.basf.com',
+            company: 'BASF Professional & Specialty Solutions',
+            title: 'Executive - Business Development',
+            division: 'Professional & Specialty Solutions',
+            note: 'Mythic | Seclira | Pest Control Solutions',
+            location: {
+                lat: 10.7820367,
+                lng: 106.7003953,
+                label: 'Deutsches Haus Ho Chi Minh City'
+            }
+        };
+
+        // ========================================
+        // SAFE STORAGE UTILITIES
+        // ========================================
+        const SafeStorage = {
+            get: function(key, fallback) {
+                try {
+                    const value = localStorage.getItem(key);
+                    return value !== null ? value : fallback;
+                } catch (e) {
+                    console.warn('localStorage unavailable:', e);
+                    return fallback;
+                }
+            },
+            set: function(key, value) {
+                try {
+                    localStorage.setItem(key, value);
+                    return true;
+                } catch (e) {
+                    console.warn('localStorage unavailable:', e);
+                    return false;
+                }
+            }
+        };
+
         // ========================================
         // TRANSLATIONS
         // ========================================
         const translations = {
             vi: {
                 profile: {
-                    name: 'Triệu Phú Hữu',
-                    title: 'Executive - Business Development',
-                    division: 'Professional & Specialty Solutions'
+                    name: CONTACT_INFO.fullName,
+                    title: CONTACT_INFO.title,
+                    division: CONTACT_INFO.division
                 },
                 valueProp: {
                     heading: 'Cam kết của chúng tôi',
@@ -744,8 +864,8 @@
             en: {
                 profile: {
                     name: 'Huu Trieu',
-                    title: 'Executive - Business Development',
-                    division: 'Professional & Specialty Solutions'
+                    title: CONTACT_INFO.title,
+                    division: CONTACT_INFO.division
                 },
                 valueProp: {
                     heading: 'Our Commitment',
@@ -791,203 +911,272 @@
             }
         };
 
-        // Language state - always default to Vietnamese
+        // Language state
         let currentLang = 'vi';
 
         // Get translation by dot notation key
         function t(key) {
-            const keys = key.split('.');
-            let value = translations[currentLang];
-            for (const k of keys) {
-                value = value?.[k];
+            try {
+                const keys = key.split('.');
+                let value = translations[currentLang];
+                for (const k of keys) {
+                    value = value?.[k];
+                }
+                return value || key;
+            } catch (e) {
+                return key;
             }
-            return value || key;
         }
+
+        // ========================================
+        // IMPROVED PLATFORM DETECTION
+        // ========================================
+        const ua = navigator.userAgent;
+        const platform = {
+            // Check for iPad in desktop mode (iPadOS 13+)
+            isIPad: /iPad/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1),
+            isIPhone: /iPhone/i.test(ua),
+            isAndroid: /Android/i.test(ua),
+            get isIOS() { return this.isIPhone || this.isIPad; },
+            get isMobile() { return this.isAndroid || this.isIOS || 'ontouchstart' in window; }
+        };
 
         // ========================================
         // I18N FUNCTIONS
         // ========================================
 
-        // Detect language from localStorage only (no auto-detect per user request)
         function detectLanguage() {
-            const saved = localStorage.getItem('appLanguage');
+            const saved = SafeStorage.get('appLanguage', null);
             if (saved && (saved === 'vi' || saved === 'en')) {
                 return saved;
             }
-            return 'vi'; // Always default to Vietnamese
+            return 'vi';
         }
 
-        // Update all static text elements
         function updateStaticContent() {
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                el.textContent = t(key);
-            });
+            try {
+                document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                    const key = el.getAttribute('data-i18n');
+                    el.textContent = t(key);
+                });
+            } catch (e) {
+                console.warn('Error updating static content:', e);
+            }
         }
 
-        // Update all ARIA labels
         function updateAriaLabels() {
-            document.querySelectorAll('[data-i18n-aria]').forEach(el => {
-                const key = el.getAttribute('data-i18n-aria');
-                el.setAttribute('aria-label', t(key));
-            });
+            try {
+                document.querySelectorAll('[data-i18n-aria]').forEach(function(el) {
+                    const key = el.getAttribute('data-i18n-aria');
+                    el.setAttribute('aria-label', t(key));
+                });
+            } catch (e) {
+                console.warn('Error updating ARIA labels:', e);
+            }
         }
 
-        // Update toggle button UI
         function updateToggleUI() {
-            const toggle = document.getElementById('langToggle');
-            if (!toggle) return;
-            toggle.querySelectorAll('.lang-option').forEach(option => {
-                const lang = option.getAttribute('data-lang');
-                option.classList.toggle('active', lang === currentLang);
-            });
-            const ariaLabel = currentLang === 'vi'
-                ? 'Chuyển ngôn ngữ: đang dùng Tiếng Việt, nhấn để chuyển sang English'
-                : 'Switch language: currently English, tap to switch to Vietnamese';
-            toggle.setAttribute('aria-label', ariaLabel);
-            toggle.setAttribute('aria-checked', currentLang === 'en');
+            try {
+                const toggle = document.getElementById('langToggle');
+                if (!toggle) return;
+                toggle.querySelectorAll('.lang-option').forEach(function(option) {
+                    const lang = option.getAttribute('data-lang');
+                    option.classList.toggle('active', lang === currentLang);
+                });
+                const ariaLabel = currentLang === 'vi'
+                    ? 'Chuyển ngôn ngữ: đang dùng Tiếng Việt, nhấn để chuyển sang English'
+                    : 'Switch language: currently English, tap to switch to Vietnamese';
+                toggle.setAttribute('aria-label', ariaLabel);
+                toggle.setAttribute('aria-checked', currentLang === 'en');
+            } catch (e) {
+                console.warn('Error updating toggle UI:', e);
+            }
         }
 
-        // Update HTML lang attribute
         function updateHtmlLang() {
-            document.documentElement.lang = currentLang;
+            try {
+                document.documentElement.lang = currentLang;
+            } catch (e) {
+                console.warn('Error updating HTML lang:', e);
+            }
         }
 
-        // Apply all language changes
         function applyLanguage() {
             updateStaticContent();
             updateAriaLabels();
             updateToggleUI();
             updateHtmlLang();
             updateButtonText();
-            localStorage.setItem('appLanguage', currentLang);
+            SafeStorage.set('appLanguage', currentLang);
         }
 
-        // Switch language with fade animation
         function switchLanguage(newLang) {
             if (newLang === currentLang) return;
-            const fadeElements = document.querySelectorAll('.i18n-fade');
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (prefersReducedMotion) {
+
+            try {
+                const fadeElements = document.querySelectorAll('.i18n-fade');
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+                if (prefersReducedMotion) {
+                    currentLang = newLang;
+                    applyLanguage();
+                    return;
+                }
+
+                fadeElements.forEach(function(el) { el.classList.add('fading'); });
+                setTimeout(function() {
+                    currentLang = newLang;
+                    applyLanguage();
+                    fadeElements.forEach(function(el) { el.classList.remove('fading'); });
+                }, 150);
+            } catch (e) {
                 currentLang = newLang;
                 applyLanguage();
-                return;
             }
-            fadeElements.forEach(el => el.classList.add('fading'));
-            setTimeout(() => {
-                currentLang = newLang;
-                applyLanguage();
-                fadeElements.forEach(el => el.classList.remove('fading'));
-            }, 150);
         }
 
-        // Toggle click handler
         function handleToggleClick() {
             const newLang = currentLang === 'vi' ? 'en' : 'vi';
             switchLanguage(newLang);
         }
 
         // ========================================
-        // CONTACT DATA & FUNCTIONS
+        // CONTACT FUNCTIONS
         // ========================================
 
-        // Contact data
-        const contactData = {
-            name: 'Hữu BASF',
-            phone: '+84968229326',
-            email: 'huu-phu.trieu@partners.basf.com',
-            company: 'BASF Professional & Specialty Solutions',
-            title: 'Executive - Business Development',
-            note: 'Mythic | Seclira | Pest Control Solutions'
-        };
-
-        // Platform detection (cached)
-        const ua = navigator.userAgent;
-        const platform = {
-            isAndroid: /Android/i.test(ua),
-            isIOS: /iPhone|iPad|iPod/i.test(ua),
-            get isMobile() { return this.isAndroid || this.isIOS; }
-        };
-
-        // Toast notification
-        function showToast(message, type = 'info', duration = 3000) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = `toast ${type} show`;
-            setTimeout(() => toast.classList.remove('show'), duration);
-        }
-
-        // Generate vCard 3.0
-        function generateVCard() {
-            return `BEGIN:VCARD
-VERSION:3.0
-FN:${contactData.name}
-N:BASF;Hữu;;;
-ORG:${contactData.company}
-TITLE:${contactData.title}
-TEL;TYPE=CELL:${contactData.phone}
-EMAIL:${contactData.email}
-NOTE:${contactData.note}
-END:VCARD`;
-        }
-
-        // Build Android Intent URL
-        function buildAndroidIntent() {
-            return `intent://contacts/#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/contact;S.name=${encodeURIComponent(contactData.name)};S.phone=${encodeURIComponent(contactData.phone)};i.phone_type=2;S.email=${encodeURIComponent(contactData.email)};i.email_type=2;S.company=${encodeURIComponent(contactData.company)};S.job_title=${encodeURIComponent(contactData.title)};end`;
-        }
-
-        // Download vCard
-        function downloadVCard() {
-            const vcard = generateVCard();
-            const link = document.createElement('a');
-            link.href = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcard);
-            link.download = 'Huu-BASF.vcf';
-            link.style.display = 'none';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        // Update button text based on platform
-        function updateButtonText() {
-            const textSpan = document.getElementById('saveContactText');
-            if (!textSpan) return;
-            const key = platform.isAndroid ? 'buttons.saveContact' :
-                        platform.isIOS ? 'buttons.saveContactIOS' : 'buttons.saveContactDesktop';
-            const icon = platform.isAndroid ? '📱' : '📥';
-            textSpan.textContent = icon + ' ' + t(key);
-        }
-
-        // Reset button state
-        function resetButton(btn, success = false) {
-            btn.classList.remove('saving');
-            const textSpan = document.getElementById('saveContactText');
-            if (success && textSpan) {
-                textSpan.textContent = '✅ ' + t('buttons.saved');
-                setTimeout(updateButtonText, 2000);
-            } else {
-                updateButtonText();
+        function showToast(message, type, duration) {
+            type = type || 'info';
+            duration = duration || 3000;
+            try {
+                const toast = document.getElementById('toast');
+                if (!toast) return;
+                toast.textContent = message;
+                toast.className = 'toast ' + type + ' show';
+                setTimeout(function() { toast.classList.remove('show'); }, duration);
+            } catch (e) {
+                console.warn('Error showing toast:', e);
             }
         }
 
-        // Main save contact function
+        function generateVCard() {
+            return 'BEGIN:VCARD\n' +
+                'VERSION:3.0\n' +
+                'FN:' + CONTACT_INFO.businessName + '\n' +
+                'N:' + CONTACT_INFO.lastName + ';' + CONTACT_INFO.firstName + ';;;\n' +
+                'ORG:' + CONTACT_INFO.company + '\n' +
+                'TITLE:' + CONTACT_INFO.title + '\n' +
+                'TEL;TYPE=CELL:' + CONTACT_INFO.phone + '\n' +
+                'EMAIL:' + CONTACT_INFO.email + '\n' +
+                'NOTE:' + CONTACT_INFO.note + '\n' +
+                'END:VCARD';
+        }
+
+        function validateField(value, maxLength) {
+            maxLength = maxLength || 100;
+            if (!value) return '';
+            return String(value).substring(0, maxLength).replace(/[\n\r;]/g, ' ').trim();
+        }
+
+        function buildAndroidIntent() {
+            try {
+                var name = encodeURIComponent(validateField(CONTACT_INFO.businessName));
+                var phone = encodeURIComponent(validateField(CONTACT_INFO.phone, 20));
+                var email = encodeURIComponent(validateField(CONTACT_INFO.email, 100));
+                var company = encodeURIComponent(validateField(CONTACT_INFO.company));
+                var title = encodeURIComponent(validateField(CONTACT_INFO.title));
+
+                var intentUrl = 'intent://contacts/#Intent;' +
+                    'action=android.intent.action.INSERT;' +
+                    'type=vnd.android.cursor.dir/contact;' +
+                    'S.name=' + name + ';' +
+                    'S.phone=' + phone + ';' +
+                    'i.phone_type=2;' +
+                    'S.email=' + email + ';' +
+                    'i.email_type=2;' +
+                    'S.company=' + company + ';' +
+                    'S.job_title=' + title + ';' +
+                    'end';
+
+                if (intentUrl.length > 2048) {
+                    console.warn('Intent URL too long, using vCard fallback');
+                    return '';
+                }
+                return intentUrl;
+            } catch (e) {
+                console.warn('Error building Android intent:', e);
+                return '';
+            }
+        }
+
+        function downloadVCard() {
+            try {
+                var vcard = generateVCard();
+                var link = document.createElement('a');
+                link.href = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcard);
+                link.download = 'Huu-BASF.vcf';
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } catch (e) {
+                console.error('Error downloading vCard:', e);
+                showToast(t('messages.error'), 'info', 5000);
+            }
+        }
+
+        function updateButtonText() {
+            try {
+                var textSpan = document.getElementById('saveContactText');
+                if (!textSpan) return;
+                var key = platform.isAndroid ? 'buttons.saveContact' :
+                          platform.isIOS ? 'buttons.saveContactIOS' : 'buttons.saveContactDesktop';
+                var icon = platform.isAndroid ? '📱' : '📥';
+                textSpan.textContent = icon + ' ' + t(key);
+            } catch (e) {
+                console.warn('Error updating button text:', e);
+            }
+        }
+
+        function resetButton(btn, success) {
+            try {
+                btn.classList.remove('saving');
+                var textSpan = document.getElementById('saveContactText');
+                if (success && textSpan) {
+                    textSpan.textContent = '✅ ' + t('buttons.saved');
+                    setTimeout(updateButtonText, 2000);
+                } else {
+                    updateButtonText();
+                }
+            } catch (e) {
+                console.warn('Error resetting button:', e);
+            }
+        }
+
         function saveContact() {
-            const btn = document.getElementById('saveContactBtn');
-            const textSpan = document.getElementById('saveContactText');
-            btn.classList.add('saving');
-            if (textSpan) textSpan.textContent = '⏳ ' + t('buttons.saving');
+            var btn = document.getElementById('saveContactBtn');
+            var textSpan = document.getElementById('saveContactText');
 
             try {
+                btn.classList.add('saving');
+                if (textSpan) textSpan.textContent = '⏳ ' + t('buttons.saving');
+
                 if (platform.isAndroid) {
-                    window.location.href = buildAndroidIntent();
-                    showToast(t('messages.androidSave'), 'info', 5000);
-                    setTimeout(() => {
-                        if (document.hasFocus()) {
-                            downloadVCard();
-                            showToast(t('messages.androidFallback'), 'info');
-                        }
+                    var intentUrl = buildAndroidIntent();
+                    if (intentUrl) {
+                        window.location.href = intentUrl;
+                        showToast(t('messages.androidSave'), 'info', 5000);
+                        setTimeout(function() {
+                            if (document.hasFocus()) {
+                                downloadVCard();
+                                showToast(t('messages.androidFallback'), 'info');
+                            }
+                            resetButton(btn);
+                        }, 2000);
+                    } else {
+                        downloadVCard();
+                        showToast(t('messages.androidFallback'), 'info');
                         resetButton(btn);
-                    }, 2000);
+                    }
                     return;
                 }
 
@@ -1003,7 +1192,8 @@ END:VCARD`;
                 showToast(t('messages.desktopSave'), 'info');
                 resetButton(btn);
 
-            } catch (error) {
+            } catch (e) {
+                console.error('Error in saveContact:', e);
                 showToast(t('messages.error'), 'info', 5000);
                 downloadVCard();
                 resetButton(btn);
@@ -1011,47 +1201,99 @@ END:VCARD`;
         }
 
         // Maps handler
-        const addressData = { lat: 10.7820367, lng: 106.7003953, label: 'Deutsches Haus Ho Chi Minh City' };
         function openMaps(e) {
             e.preventDefault();
-            let url;
-            if (platform.isAndroid) {
-                url = `geo:${addressData.lat},${addressData.lng}?q=${addressData.lat},${addressData.lng}(${encodeURIComponent(addressData.label)})`;
-            } else if (platform.isIOS) {
-                url = `maps://maps.apple.com/?q=${encodeURIComponent(addressData.label)}&ll=${addressData.lat},${addressData.lng}`;
-            } else {
-                window.open(`https://maps.google.com/?q=${addressData.lat},${addressData.lng}`, '_blank');
-                return;
+            try {
+                var loc = CONTACT_INFO.location;
+                var url;
+                if (platform.isAndroid) {
+                    url = 'geo:' + loc.lat + ',' + loc.lng + '?q=' + loc.lat + ',' + loc.lng + '(' + encodeURIComponent(loc.label) + ')';
+                } else if (platform.isIOS) {
+                    url = 'maps://maps.apple.com/?q=' + encodeURIComponent(loc.label) + '&ll=' + loc.lat + ',' + loc.lng;
+                } else {
+                    window.open('https://maps.google.com/?q=' + loc.lat + ',' + loc.lng, '_blank');
+                    return;
+                }
+                window.location.href = url;
+            } catch (e) {
+                console.error('Error opening maps:', e);
+                window.open('https://maps.google.com/?q=' + CONTACT_INFO.location.lat + ',' + CONTACT_INFO.location.lng, '_blank');
             }
-            window.location.href = url;
         }
 
-        // Event listeners
-        document.getElementById('saveContactBtn').addEventListener('click', saveContact);
-        document.getElementById('addressLink').addEventListener('click', openMaps);
-        document.getElementById('langToggle')?.addEventListener('click', handleToggleClick);
-
-        // Touch effects
-        document.querySelectorAll('.action-btn').forEach(btn => {
-            btn.addEventListener('touchstart', function() { this.style.transform = 'scale(0.95)'; }, { passive: true });
-            btn.addEventListener('touchend', function() { this.style.transform = ''; }, { passive: true });
-        });
-
-        // Avatar error handling
-        const avatarImg = document.getElementById('avatarImg');
-        const avatarFallback = document.getElementById('avatarFallback');
-        if (avatarImg) {
-            avatarImg.addEventListener('error', function() {
-                this.style.display = 'none';
-                if (avatarFallback) avatarFallback.style.display = 'flex';
-            });
+        // QR Code error handler
+        function handleQRError() {
+            try {
+                var qrImg = document.getElementById('qrCodeImg');
+                var placeholder = document.getElementById('qrPlaceholder');
+                if (qrImg) qrImg.style.display = 'none';
+                if (placeholder) placeholder.style.display = 'flex';
+                console.warn('QR code API failed - showing fallback');
+            } catch (e) {
+                console.warn('Error handling QR fallback:', e);
+            }
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            currentLang = detectLanguage();
-            applyLanguage();
-        });
+        // ========================================
+        // INITIALIZATION
+        // ========================================
+        function init() {
+            try {
+                // Initialize language
+                currentLang = detectLanguage();
+                applyLanguage();
+
+                // Event listeners
+                var saveBtn = document.getElementById('saveContactBtn');
+                if (saveBtn) saveBtn.addEventListener('click', saveContact);
+
+                var addressLink = document.getElementById('addressLink');
+                if (addressLink) addressLink.addEventListener('click', openMaps);
+
+                var langToggle = document.getElementById('langToggle');
+                if (langToggle) langToggle.addEventListener('click', handleToggleClick);
+
+                // QR error handling
+                var qrImg = document.getElementById('qrCodeImg');
+                if (qrImg) {
+                    qrImg.addEventListener('error', handleQRError);
+                    // Timeout fallback for slow/failed QR API
+                    setTimeout(function() {
+                        if (qrImg && !qrImg.complete) {
+                            handleQRError();
+                        }
+                    }, 5000);
+                }
+
+                // Touch effects
+                document.querySelectorAll('.action-btn').forEach(function(btn) {
+                    btn.addEventListener('touchstart', function() { this.style.transform = 'scale(0.95)'; }, { passive: true });
+                    btn.addEventListener('touchend', function() { this.style.transform = ''; }, { passive: true });
+                });
+
+                // Avatar error handling
+                var avatarImg = document.getElementById('avatarImg');
+                var avatarFallback = document.getElementById('avatarFallback');
+                if (avatarImg) {
+                    avatarImg.addEventListener('error', function() {
+                        this.style.display = 'none';
+                        if (avatarFallback) avatarFallback.style.display = 'flex';
+                    });
+                }
+
+            } catch (e) {
+                console.error('Error during initialization:', e);
+            }
+        }
+
+        // Run on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+    })();
     </script>
 </body>
 
