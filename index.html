@@ -82,8 +82,8 @@
         /* Avatar fallback - shows initials when image fails (positioned behind image) */
         .avatar-fallback { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; color: white; z-index: 1; }
         .name { font-size: 24px; font-weight: 700; color: var(--basf-dark); margin-bottom: 8px; text-decoration: none; }
-        .title { font-size: 14px; font-weight: 500; color: var(--basf-blue); margin-bottom: 4px; text-decoration: none; }
-        .division { font-size: 13px; color: #5a6a7a; margin-bottom: 16px; text-decoration: none !important; }
+        .title { font-size: 14px; font-weight: 600; color: #003d7a; margin-bottom: 4px; text-decoration: none; }
+        .division { font-size: 13px; color: #1a2a3a; font-weight: 600; margin-bottom: 16px; text-decoration: none !important; }
         .product-badges { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
         .product-badge {
             position: relative; padding: 12px 24px; border-radius: 30px; font-size: 15px; font-weight: 800;
@@ -110,11 +110,12 @@
         @keyframes glow-gold { 0%, 100% { box-shadow: 0 4px 20px rgba(255,193,7,0.5), 0 0 30px rgba(255,215,0,0.3); } 50% { box-shadow: 0 4px 25px rgba(255,193,7,0.7), 0 0 45px rgba(255,215,0,0.5); } }
         @keyframes glow-amber { 0%, 100% { box-shadow: 0 4px 20px rgba(255,179,0,0.5), 0 0 30px rgba(255,202,40,0.3); } 50% { box-shadow: 0 4px 25px rgba(255,179,0,0.7), 0 0 45px rgba(255,202,40,0.5); } }
         .value-prop {
-            padding: 20px 24px; background: linear-gradient(to right, rgba(0,74,150,0.08), rgba(33,160,210,0.1));
-            border-left: 3px solid var(--basf-light-blue); margin: 20px 24px; border-radius: 0 12px 12px 0;
+            padding: 20px 24px; background: linear-gradient(to right, rgba(255,255,255,0.55), rgba(255,255,255,0.65));
+            border-left: 4px solid var(--basf-blue); margin: 20px 24px; border-radius: 0 12px 12px 0;
+            box-shadow: 0 2px 8px rgba(0,74,150,0.08);
         }
-        .value-prop h3 { font-size: 13px; font-weight: 600; color: var(--basf-blue); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .value-prop p { font-size: 14px; color: var(--basf-dark); line-height: 1.6; }
+        .value-prop h3 { font-size: 13px; font-weight: 700; color: #003366; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; text-shadow: 0 0 10px rgba(255,255,255,0.9); }
+        .value-prop p { font-size: 14px; color: #1a1a2e; line-height: 1.6; font-weight: 600; text-shadow: 0 0 8px rgba(255,255,255,0.85); }
         .contact-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 24px 24px; }
         .action-btn {
             display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 12px;
@@ -150,7 +151,7 @@
         .address-link:hover { color: var(--basf-blue); }
         .address-link svg { flex-shrink: 0; width: 16px; height: 16px; fill: var(--basf-blue); margin-top: 2px; }
         .address-text { text-align: left; }
-        .address-note { font-size: 11px; color: var(--gray); font-style: italic; }
+        .address-note { font-size: 11px; color: #d97f00; font-style: italic; font-weight: 600; }
         .card-footer {
             padding: 16px 24px; background: linear-gradient(135deg, var(--basf-blue) 0%, var(--basf-light-blue) 100%);
             text-align: center; position: relative; overflow: hidden;
